@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware((to) => {
   if (to.path === '/signin/callback')
     return
 
-  onMastoInit(() => {
+  onHydrated(() => {
     if (!currentUser.value)
       return navigateTo(`/${currentServer.value}/public/local`)
     if (to.path === '/')

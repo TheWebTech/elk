@@ -9,37 +9,37 @@ let relationship = $(useRelationship(account))
 
 const isSelf = $(useSelfAccount(() => account))
 
-const masto = useMasto()
+const { client } = $(useMasto())
 const toggleMute = async () => {
   // TODO: Add confirmation
 
   relationship!.muting = !relationship!.muting
   relationship = relationship!.muting
-    ? await masto.v1.accounts.mute(account.id, {
+    ? await client.v1.accounts.mute(account.id, {
       // TODO support more options
     })
-    : await masto.v1.accounts.unmute(account.id)
+    : await client.v1.accounts.unmute(account.id)
 }
 
 const toggleBlockUser = async () => {
   // TODO: Add confirmation
 
   relationship!.blocking = !relationship!.blocking
-  relationship = await masto.v1.accounts[relationship!.blocking ? 'block' : 'unblock'](account.id)
+  relationship = await client.v1.accounts[relationship!.blocking ? 'block' : 'unblock'](account.id)
 }
 
 const toggleBlockDomain = async () => {
   // TODO: Add confirmation
 
   relationship!.domainBlocking = !relationship!.domainBlocking
-  await masto.v1.domainBlocks[relationship!.domainBlocking ? 'block' : 'unblock'](getServerName(account))
+  await client.v1.domainBlocks[relationship!.domainBlocking ? 'block' : 'unblock'](getServerName(account))
 }
 
 const toggleReblogs = async () => {
   // TODO: Add confirmation
 
   const showingReblogs = !relationship?.showingReblogs
-  relationship = await masto.v1.accounts.follow(account.id, { reblogs: showingReblogs })
+  relationship = await client.v1.accounts.follow(account.id, { reblogs: showingReblogs })
 }
 </script>
 
