@@ -107,6 +107,7 @@ const isNotifiedOnPost = $computed(() => !!relationship?.notifying)
             rounded-full p2 border-1 transition-colors
             :class="isNotifiedOnPost ? 'text-primary border-primary hover:bg-red/20 hover:text-red hover:border-red' : 'border-base hover:text-primary'"
             @click="toggleNotifications"
+            title="Toggle notifications"
           >
             <span v-if="isNotifiedOnPost" i-ri:bell-fill block text-current />
             <span v-else i-ri-bell-line block text-current />
